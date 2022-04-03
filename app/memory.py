@@ -10,7 +10,8 @@ class Memory:
         self._total_kb = 0
         self._free_kb = 0
         logger.debug("Memory class instanciated")
-        self._read()
+        logger.info("My information. Memory class instanciated")
+        # self._read()
 
     def _read(self):
         with open("/proc/meminfo", "r") as f:

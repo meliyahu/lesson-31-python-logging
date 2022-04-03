@@ -1,0 +1,25 @@
+version: 1
+formatters:
+  simple:
+    format: "%(asctime)s %(name)s: %(message)s"
+  extended:
+    format: "%(asctime)s %(name)s %(levelname)s: %(message)s"
+handlers:
+  xyzconsole:
+    level: DEBUG
+    class : logging.StreamHandler
+    formatter: extended
+  xyzfile:
+    class: logging.FileHandler
+    formatter: extended
+    filename: 'acoustic_harvester.log'
+loggers:
+  __main__:
+    level: DEBUG
+    handlers: [xyzfile, xyzconsole]
+  harvester_main:
+    level: INFO
+    handlers: [xyzfile, xyzconsole]
+  app:
+    level: DEBUG
+    handlers: [xyzfile, xyzconsole]

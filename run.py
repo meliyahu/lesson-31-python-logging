@@ -6,11 +6,12 @@ from app.units import MB
 from app.memory import Memory
 from app.disk import Disk
 
-with open('check.logging.yml', "r") as f:
+with open('harvester.logging.yml', "r") as f:
     config = yaml.safe_load(f)
     logging.config.dictConfig(config)
 
-logger = logging.getLogger(__name__)
+# logger = logging.getLogger(__name__)
+logger = logging.getLogger("harvester_main")
 
 
 def get_arguments():
@@ -32,12 +33,13 @@ def get_arguments():
 
 def main():
     args = get_arguments()
+    logger.debug("Starting now...")
 
-    if args.memory:
-        logger.debug("Checking memory...")
-        meminfo = Memory()
-        print(meminfo.free(unit=MB))
-        print(meminfo.total(unit=MB))
+    # if args.memory:
+    logger.debug("Checking memory...")
+    meminfo = Memory()
+    print(meminfo.free(unit=MB))
+    print(meminfo.total(unit=MB))
 
     if args.disk:
         diskinfo = Disk()
