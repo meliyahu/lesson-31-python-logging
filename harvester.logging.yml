@@ -6,20 +6,30 @@ formatters:
     format: "%(asctime)s %(name)s %(levelname)s: %(message)s"
 handlers:
   xyzconsole:
-    level: DEBUG
     class : logging.StreamHandler
     formatter: extended
   xyzfile:
     class: logging.FileHandler
     formatter: extended
     filename: 'acoustic_harvester.log'
+  timedfile:
+    class: logging.handlers.TimedRotatingFileHandler
+    formatter: extended
+    level: DEBUG
+    # utc: True
+    encoding: utf8
+    when: 'S'
+    # when: 'midnight'
+    interval: 2
+    backupCount: 7 # keep one week of historical logs
+    filename: 'acoustic_harvester.log'
 loggers:
   __main__:
     level: DEBUG
     handlers: [xyzfile, xyzconsole]
   harvester_main:
-    level: INFO
-    handlers: [xyzfile, xyzconsole]
+    level: DEBUG
+    handlers: [timedfile, xyzconsole]
   app:
     level: DEBUG
-    handlers: [xyzfile, xyzconsole]
+    handlers: [timedfile, xyzconsole]

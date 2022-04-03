@@ -1,4 +1,5 @@
 import yaml
+import time
 import logging.config
 import logging
 import argparse
@@ -12,7 +13,6 @@ with open('harvester.logging.yml', "r") as f:
 
 # logger = logging.getLogger(__name__)
 logger = logging.getLogger("harvester_main")
-
 
 def get_arguments():
     parser = argparse.ArgumentParser(
@@ -38,13 +38,9 @@ def main():
     # if args.memory:
     logger.debug("Checking memory...")
     meminfo = Memory()
-    print(meminfo.free(unit=MB))
-    print(meminfo.total(unit=MB))
-
-    if args.disk:
-        diskinfo = Disk()
-        print(diskinfo.free())
-        print(diskinfo.total())
+    for _ in range(1000):
+        logger.debug("Ha ha!")
+        time.sleep(3)
 
 
 if __name__ == "__main__":
